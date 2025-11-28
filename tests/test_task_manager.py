@@ -33,6 +33,17 @@ def test_add_task_without_title(tm):
     """Test that adding task without title raises error"""
     with pytest.raises(ValueError):
         tm.add_task("")
+        
+def test_add_task_with_priority(tm):
+    """Test adding a task with priority"""
+    task = tm.add_task("Urgent task", priority="high")
+    assert task["priority"] == "high"
+
+
+def test_add_task_invalid_priority(tm):
+    """Test that invalid priority raises error"""
+    with pytest.raises(ValueError):
+        tm.add_task("Task", priority="urgent")
 
 
 def test_list_tasks(tm):

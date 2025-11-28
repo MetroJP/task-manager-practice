@@ -30,15 +30,19 @@ class TaskManager:
         with open(self.filename, 'w') as f:
             json.dump(self.tasks, f, indent=2)
     
-    def add_task(self, title, description=""):
+    def add_task(self, title, description="", priority="medium"):
         """Add a new task"""
         if not title:
             raise ValueError("Task title cannot be empty")
+        
+        if priority not in ["low", "medium", "high"]:
+            raise ValueError("Priority must be low, medium, or high")
         
         task = {
             "id": len(self.tasks) + 1,
             "title": title,
             "description": description,
+            "priority": priority,  # NEW!
             "completed": False,
             "created_at": datetime.now().isoformat()
         }
